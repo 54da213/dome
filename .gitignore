@@ -1,0 +1,11 @@
+*.pyc
+*.log
+log/*
+*.db
+.idea
+.idea/*
+\#_sessions/*
+\#_sessions
+*-journal
+tmp_files*
+local_config.py
