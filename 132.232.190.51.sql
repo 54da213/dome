@@ -1,10 +1,9 @@
 -- 用户表
 
-CREATE TABLE account
+CREATE TABLE car
  (
   id  INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  user VARCHAR(50) NOT NULL DEFAULT "",
-  pwd VARCHAR(100) NOT NULL DEFAULT "",
-  nick_name  VARCHAR(11) not null DEFAULT ""
+  name VARCHAR(50) NOT NULL DEFAULT "",
+  time VARCHAR(100) NOT NULL DEFAULT ""
 )
 engine myisam charset UTF8;

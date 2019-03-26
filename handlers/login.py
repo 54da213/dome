@@ -15,35 +15,37 @@ from config import ENCRYPT_STR
 class LoginHandler(BaseHandler):
 
     def get(self, *args, **kwargs):
-        user = self.get_argument("tel")
-        pwd = self.get_argument("pwd", None)
-        _type = self.get_argument("type")
+        return self.render("login.html")
 
-        if not (user and _type):
-            return self.write_resp400("传入参数不完整")
-
-        if not re.match(r'^(13\d|14[5|7]|15\d|166|17[3|6|7]|18\d)\d{8}$', user):
-            return self.write_resp400("电话格式错误")
-        account = None
-        try:
-            account = Account(user)
-        except Exception as e:
-            self.write_resp400("该用户不存在")
-        msg = ""
-        # 手机登陆
-        if _type == "0":
-            msg = account.login_tel(pwd)
-        # 微信登陆
-        elif _type == "1":
-            msg = account.log_in_wc()
-        else:
-            self.write_resp400("参数错误")
-        if msg:
-            self.write_resp400(msg)
-        # 跳转
-        token = str(uuid.uuid4())
-        self.session[token] = account.user
-        self.write_resp200(token)
+        # user = self.get_argument("tel")
+        # pwd = self.get_argument("pwd", None)
+        # _type = self.get_argument("type")
+        #
+        # if not (user and _type):
+        #     return self.write_resp400("传入参数不完整")
+        #
+        # if not re.match(r'^(13\d|14[5|7]|15\d|166|17[3|6|7]|18\d)\d{8}$', user):
+        #     return self.write_resp400("电话格式错误")
+        # account = None
+        # try:
+        #     account = Account(user)
+        # except Exception as e:
+        #     self.write_resp400("该用户不存在")
+        # msg = ""
+        # # 手机登陆
+        # if _type == "0":
+        #     msg = account.login_tel(pwd)
+        # # 微信登陆
+        # elif _type == "1":
+        #     msg = account.log_in_wc()
+        # else:
+        #     self.write_resp400("参数错误")
+        # if msg:
+        #     self.write_resp400(msg)
+        # # 跳转
+        # token = str(uuid.uuid4())
+        # self.session[token] = account.user
+        # self.write_resp200(token)
 
 
 class LogOutHandler(BaseHandler):
