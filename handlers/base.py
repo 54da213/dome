@@ -58,13 +58,14 @@ class BaseHandler(SessionBaseHandler):
 
     def json(self):
         return json.loads(self.request.body)
+
     def get_session(self, key):
         return self.session.get(key)
 
     # 验证登录状态
     def get_current_user(self):
-        #return self.get_session("username")
-        return "111"
+
+        return self.get_session("username")
 
     # def write_error(self, status_code, **kwargs):
     #     if status_code==400:

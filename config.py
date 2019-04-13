@@ -7,12 +7,6 @@ sys.path.append("/home/ls/Ai-stock-service/handlers")
 # 密码加盐
 ENCRYPT_STR="xxxoxxxx"
 
-#验证码位数
-CHECKCODE_N=6
-
-#昵称生成
-NICK="wuqing"
-
 #数据库
 HOST="192.168.159.128"
 PORT=3306
