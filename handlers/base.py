@@ -5,6 +5,7 @@ from tornado import gen
 import tornado.options
 from log import *
 from torndsession.sessionhandler import SessionBaseHandler
+from signature import signatuer
 
 
 # 权限验证的装饰器
@@ -64,8 +65,23 @@ class BaseHandler(SessionBaseHandler):
 
     # 验证登录状态
     def get_current_user(self):
+        METHOD = self.request.method
+        if METHOD == "GET":
+            param = {k: v[0] for k, v in self.request.arguments.items() if v}
+        elif METHOD == "POST":
+            param = self.get_body_arguments()
 
-        return self.get_session("username")
+        local_signatuer_str = signatuer(**param)
+        headers = self.request.headers
+        user_signatuer_str = headers["signatuer"]
+        if local_signatuer_str != user_signatuer_str:
+            return
+        token = headers.get("token")
+        if (not token) and ("/api/v1/login/" not in self.request.uri):
+            return
+        if "/api/v1/login/" in self.request.uri:
+            return "success"
+        return self.get_session(token)
 
     # def write_error(self, status_code, **kwargs):
     #     if status_code==400:
