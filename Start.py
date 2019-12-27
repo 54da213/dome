@@ -18,9 +18,8 @@ define("port", type=int, default=9000)
 configs = dict(
     template_path=os.path.join(BASE_DIR, "templates"),
     static_path=os.path.join(BASE_DIR, "static"),
-    login_url="/login",
+    login_url="/html/v1/login/",
 )
-
 
 
 class CustomApplication(tornado.web.Application):

@@ -7,6 +7,8 @@ from log import *
 from torndsession.sessionhandler import SessionBaseHandler
 from signature import signatuer
 
+AUTH_SUCCESS = "AuthenticationSuccessful"
+
 
 # 权限验证的装饰器
 def superuser_only(method):
@@ -66,22 +68,37 @@ class BaseHandler(SessionBaseHandler):
     # 验证登录状态
     def get_current_user(self):
         METHOD = self.request.method
-        if METHOD == "GET":
-            param = {k: v[0] for k, v in self.request.arguments.items() if v}
-        elif METHOD == "POST":
-            param = self.get_body_arguments()
-
-        local_signatuer_str = signatuer(**param)
         headers = self.request.headers
-        user_signatuer_str = headers["signatuer"]
-        if local_signatuer_str != user_signatuer_str:
-            return
-        token = headers.get("token")
-        if (not token) and ("/api/v1/login/" not in self.request.uri):
-            return
-        if "/api/v1/login/" in self.request.uri:
-            return "success"
-        return self.get_session(token)
+        # 登录页面
+        if self.request.uri.startswith("/html/v1/login/"):
+            return AUTH_SUCCESS
+        # 登录接口
+        if self.request.uri == "/api/v1/login/":
+            param = json.loads(self.request.body)
+            local_sign = signatuer(**param)
+            user_sign = headers["signatuer"]
+            if local_sign == user_sign:
+                return AUTH_SUCCESS
+        if self.request.uri.startswith("/?token") or self.request.uri.startswith("/html"):
+            token = self.get_argument("token")
+            return self.get_session(token)
+        # API
+        if self.request.uri.startswith("/api"):
+            token = headers.get("Token")
+            if not self.get_session(token):
+                return
+            if METHOD == "GET":
+                param = {k: v[0] for k, v in self.request.arguments.items() if v}
+            elif METHOD == "POST":
+                if self.request.uri == "/api/v1/upload/":
+                    param = json.loads(self.get_arguments("data")[0])
+                else:
+                    param = self.json()
+            local_sign = signatuer(**param)
+            user_sign = headers["signatuer"]
+            if local_sign != user_sign:
+                return
+            return AUTH_SUCCESS
 
     # def write_error(self, status_code, **kwargs):
     #     if status_code==400:

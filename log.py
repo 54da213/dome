@@ -4,10 +4,12 @@ import os
 import logging
 from config import LOG_DIR, LOG_FILE
 
-if not os.path.exists(LOG_DIR + '/' + LOG_FILE):
+if not os.path.exists(LOG_DIR + '\\' + LOG_FILE):
     if not os.path.exists(LOG_DIR):
         os.mkdir(LOG_DIR)
-    os.mknod(LOG_DIR + '/' + LOG_FILE)
+    # os.mknod(LOG_DIR + '/' + LOG_FILE)
+    with open(LOG_DIR+'\\'+LOG_FILE,"a+") as f:
+        pass
 
 log_config = dict(
     level=logging.WARNING,

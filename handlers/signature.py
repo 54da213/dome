@@ -14,6 +14,7 @@ def signatuer(*args, **kwargs):
     s = "{}{}".format(key_str, values_str)
     # 加密
     signature_str1 = md5(s)
+    print signature_str1
     # 加盐加密na
     signature_str = md5("NCSS-SASH-{}".format(signature_str1))
     logging.info("********Sign_Str**********".format(signature_str))
@@ -25,5 +26,5 @@ def token(*args, **kwargs):
 
 
 if __name__ == '__main__':
-    test = {}
+    test = {"account":"root","pwd":"Ls19950906"}
     print signatuer(**test)
