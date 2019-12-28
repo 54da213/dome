@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>主页</title>
+<link href="http://g.alicdn.com/sj/dpl/1.5.1/css/sui.min.css" rel="stylesheet">
+<style type="text/css">
+    textarea {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+<script type="text/javascript" src="http://g.alicdn.com/sj/lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="http://g.alicdn.com/sj/dpl/1.5.1/js/sui.min.js"></script>
+</head>
+<body>
+<!--导航-->
+<div class="sui-navbar">
+    <div class="navbar-inner"><a href="#" class="sui-brand">礼品屋</a>
+        <ul class="sui-nav">
+            <li class="active"><a href="#">首页</a></li>
+            <li><a href="#">组件</a></li>
+            <li class="sui-dropdown"><a href="javascript:void(0);" data-toggle="dropdown" class="dropdown-toggle">其他 <i
+                    class="caret"></i></a>
+                <ul role="menu" class="sui-dropdown-menu">
+                    <li role="presentation"><a role="menuitem" tabindex="-1"
+                                               href="/html/v1/test/?token={{token}}">游戏</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">项目组成员</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">版权</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="sui-nav pull-right">
+            <li><a href="#">个人中心</a></li>
+            <li><a href="#">帮助</a></li>
+        </ul>
+    </div>
+</div>
+<!--导航结束-->
+
+<!--格栅分行 10行-->
+<div class="grid-demo">
+    <div class="sui-row-fluid">
+        <div class="span2">
+            <div class="sui-msg msg-large msg-success">
+  <div class="msg-con">成功信息提示</div>
+  <s class="msg-icon"></s>
+</div>
+        </div>
+        <div class="span6"></div>
+    </div>
+    <div class="sui-row-fluid">
+        <div class="span3">
+            <!--设置表单-->
+            <form class="sui-form form-horizontal">
+                <div class="control-group" id=app>
+                    <label for="inputEmail" class="control-label">选择清单：</label>
+                    <div class="controls">
+                        <input type="file" value="" id="file" @change="Upload($event)">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">游戏模式：</label>
+                    <div class="controls">
+                        <label data-toggle="radio" class="radio-pretty inline">
+                            <input type="radio" name="radio"><span>抽奖机</span>
+                        </label>
+                        <label data-toggle="radio" class="radio-pretty inline">
+                            <input type="radio" name="radio"><span>转盘</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="inputPassword" class="control-label">配置轮数：</label>
+                    <div class="controls">
+                        <input type="text" id="1" placeholder="最大不能超过礼品个数">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="inputPassword" class="control-label">每轮个数：</label>
+                    <div class="controls">
+                        <input type="text" id="2" placeholder="最大不能超过礼品个数">
+                    </div>
+                </div>
+                <!--<div class="control-group">-->
+                <!--<label class="control-label"></label>-->
+                <!--<div class="controls">-->
+                <!--<label data-toggle="checkbox" class="checkbox-pretty inline">-->
+                <!--<input type="checkbox" name="remember-me"><span>记住我</span>-->
+                <!--</label>-->
+                <!--</div>-->
+                <!--</div>-->
+                <div class="control-group">
+                    <label class="control-label"></label>
+                    <div class="controls">
+                        <a href="/html/v1/test/?token={{token}}" class="sui-btn btn-small btn-success">查看愿望清单</a>
+                        <!--<button type="submit" class="sui-btn btn-primary">Sign in</button>-->
+                        <!--<button type="submit" class="sui-btn btn-primary">Sign in</button>-->
+                    </div>
+                </div>
+            </form>
+            <!--设置表单结束-->
+        </div>
+        <div class="span5"></div>
+    </div>
+    <div class="sui-row-fluid">
+        <div class="span2"></div>
+        <div class="span6"></div>
+    </div>
+    <div class="sui-row-fluid">
+        <div class="span2"></div>
+        <div class="span1"></div>
+        <div class="span1">
+        </div>
+        <div class="span1">
+
+        </div>
+        <div class="span1">
+            <form class="sui-form">
+                <input type="text" placeholder="萌萌哒礼物哟~" class="input-medium" style="height:120px;width:138px;"
+                       readonly="readonly">
+            </form>
+        </div>
+        <div class="span1">
+            <form class="sui-form">
+                <input type="text" placeholder="萌萌哒礼物哟~" class="input-medium" style="height:120px;width:138px;"
+                       readonly="readonly">
+            </form>
+        </div>
+        <div class="span1">
+            <form class="sui-form">
+                <input type="text" placeholder="萌萌哒礼物哟~" class="input-medium" style="height:120px;width:138px;"
+                       readonly="readonly">
+            </form>
+        </div>
+    </div>
+    <div class="sui-row-fluid">
+        <div class="span5"></div>
+        <div class="span3">
+            <a href="javascript:void(0);" class="sui-btn btn-block btn-xlarge btn-success">开始</a>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-simple-upload@0.1.6/dist/vue-simple-upload.min.js"></script>
+<script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.js"></script>
+<script type="module" src="/static/js/admin.js"></script>
+</body>
+</html>
